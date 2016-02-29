@@ -15,11 +15,13 @@ class ResponsiveContainer extends Component {
     width: PropTypes.string,
     height: PropTypes.string,
     children: PropTypes.node,
+    style: PropTypes.object,
   };
 
   static defaultProps = {
     width: '100%',
     height: '100%',
+    style: {},
   };
 
   state = {
@@ -51,10 +53,10 @@ class ResponsiveContainer extends Component {
   render() {
     const { hasInitialized, width, height } = this.state;
     const { children } = this.props;
-    const style = {
+    const style = Object.assign({}, {
       width: '100%',
       height: '100%',
-    };
+    }, this.props.style);
 
     if (hasInitialized) {
       invariant(width > 0 && height > 0,
